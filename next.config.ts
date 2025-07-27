@@ -5,6 +5,18 @@ const nextConfig: NextConfig = {
     webpack: (config, { isServer }) => {
         config.module.exprContextCritical = false;
 
+        // Exclude problematic packages from Edge Runtime
+        if (!isServer) {
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                fs: false,
+                path: false,
+                crypto: false,
+                stream: false,
+                os: false,
+            };
+        }
+
         return config;
     }
 };
