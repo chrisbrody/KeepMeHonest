@@ -1,16 +1,20 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  // Temporarily disable Supabase middleware for Edge Runtime compatibility
-  // TODO: Re-enable once environment variables are configured
+  // Simple middleware that just passes through for now
+  // TODO: Add Supabase auth once environment variables are configured
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // Only run middleware on specific protected routes when we need auth
-    // Disabled for now to prevent deployment issues
-    // "/dashboard/:path*",
-    // "/protected/:path*"
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };
