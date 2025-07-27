@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ['@supabase/ssr']
-  },
+  serverExternalPackages: ['@supabase/ssr'],
   webpack: (config, { isServer }) => {
     config.module.exprContextCritical = false;
 
