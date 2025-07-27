@@ -1,8 +1,9 @@
-import { type NextRequest } from "next/server";
-import { updateSession } from "@/utils/supabase/middleware";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  // Temporarily disable Supabase middleware for Edge Runtime compatibility
+  // TODO: Re-enable once environment variables are configured
+  return NextResponse.next();
 }
 
 export const config = {
